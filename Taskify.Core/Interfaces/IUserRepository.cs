@@ -10,5 +10,6 @@ namespace Taskify.Core.Interfaces
     {
         Task<IEnumerable<User>> GetAllAsync();
         Task CreateAsync(User user);
+        Task<User> GetEmailAsync(string email);
     }
 }

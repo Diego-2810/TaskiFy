@@ -24,6 +24,12 @@ namespace Taskify.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateUser (CreateUserDto createUserDto)
         {
+            var existingUser = await _userRepository.GetEmailAsync(createUserDto.Email);
+            if(existingUser != null)
+            {
+                return BadRequest("Email already exists");
+            }
+
             var user = new User 
             {
                 Username = createUserDto.Username,

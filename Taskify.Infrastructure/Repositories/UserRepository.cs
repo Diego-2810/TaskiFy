@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using Dapper;
 using Taskify.Core.Entities;
 using Taskify.Core.Interfaces;
@@ -27,6 +28,13 @@ namespace Taskify.Infrastructure.Repositories
                 INSERT INTO users (Username, Email, password_Hash)
                 VALUES (@Username, @Email, @PasswordHash)";
             await connection.ExecuteAsync(query, user);
+        }
+
+        public async Task<User> GetEmailAsync(string email)
+        {
+            using var connection = _databaseConnection.CreateConnection();
+            string query = "SELECT * FROM Users WHERE Email = @Email";
+            return await connection.QueryFirstOrDefaultAsync<User>(query, new { Email = email });
         }
     }
 }

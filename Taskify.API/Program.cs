@@ -11,6 +11,7 @@ builder.Services.AddSingleton<DatabaseConnection>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddControllers();
 
+
 var app = builder.Build();
 
 app.UseSwagger();
